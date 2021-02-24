@@ -36,6 +36,11 @@ public class ArrayQuestion {
             System.out.println();
         }
 
+        // 数组问题5
+        System.out.println("--------------数组问题-最长公共前缀-------------");
+        String[] E = {"flower","flow","flight"};
+        System.out.println(longestCommonPrefix(E));
+
 
     }
 
@@ -161,6 +166,29 @@ public class ArrayQuestion {
             }
         }
         return A;
+    }
+
+
+    /**
+     * 数组问题5
+     * @param strs
+     * @return
+     */
+    public static String longestCommonPrefix(String[] strs) {
+        //判空
+        if (strs.length == 0) {
+            return "";
+        }
+        String str = strs[0];
+        for (int i = 1; i < strs.length; i++) {
+            while (strs[i].indexOf(str) != 0) {
+                str = str.substring(0, str.length() - 1);
+            }
+        }
+        return str;
+
+
+
     }
 
 }
