@@ -41,6 +41,22 @@ public class ArrayQuestion {
         String[] E = {"flower","flow","flight"};
         System.out.println(longestCommonPrefix(E));
 
+        // 数组问题6
+        System.out.println("--------------数组问题-转置矩阵-------------");
+        int[][] F = {{1,1,0,8},{1,0,1,5},{9,0,0,0},{9,3,0,1}};
+        int[][] arr1 = transpose(F);
+        for (int i = 0; i < arr1.length; i++) {
+            for (int j = 0; j < arr1[i].length; j++) {
+                System.out.print(arr1[i][j]);
+            }
+            System.out.println();
+        }
+
+        // 数组问题2
+        System.out.println("--------------数组区域和问题-------------");
+        int[] G = {1,4,1,0,3,0,1,2,2,2,0};
+        System.out.println(NumArray(G,2,7));
+
 
     }
 
@@ -186,9 +202,36 @@ public class ArrayQuestion {
             }
         }
         return str;
+    }
 
 
+    /**
+     * 数组问题6
+     */
+    public static int[][] transpose(int[][] matrix) {
+        int m = matrix.length;
+        int n = matrix[0].length;
+        int[][] res = new int[n][m];
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                res[j][i] = matrix[i][j];
+            }
+        }
+        return res;
+    }
 
+    /**
+     * 数组问题7
+     */
+    public static int NumArray(int[] nums, int m, int n) {
+        int[] sums = new int[nums.length + 1];
+        if (sums.length == 0) {
+            return 0;
+        }
+        for (int i = 0; i < nums.length; i++) {
+            sums[i + 1] = sums[i] + nums[i];
+        }
+        return sums[n + 1] - sums[m];
     }
 
 }
