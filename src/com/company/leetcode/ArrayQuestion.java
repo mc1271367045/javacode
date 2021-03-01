@@ -52,10 +52,18 @@ public class ArrayQuestion {
             System.out.println();
         }
 
-        // 数组问题2
+        // 数组问题7
         System.out.println("--------------数组区域和问题-------------");
         int[] G = {1,4,1,0,3,0,1,2,2,2,0};
         System.out.println(NumArray(G,2,7));
+
+        // 数组问题8
+        System.out.println("--------------数组排序-------------");
+        int[] H = {1,4,2,4,5};
+        int[] sortArray = sortArray(H);
+        for (int i = 0; i < sortArray.length; i++) {
+            System.out.println(sortArray[i]);
+        }
 
 
     }
@@ -232,6 +240,22 @@ public class ArrayQuestion {
             sums[i + 1] = sums[i] + nums[i];
         }
         return sums[n + 1] - sums[m];
+    }
+
+    /**
+     * 数组问题8
+     */
+    public static int[] sortArray(int[] nums) {
+        for (int i = 0; i < nums.length - 1; i++) {
+            for (int j = 0; j < nums.length - 1 - i; j++) {
+                if (nums[j] > nums[j + 1]) {
+                    int temp = nums[j];
+                    nums[j] = nums[j + 1];
+                    nums[j + 1] = temp;
+                }
+            }
+        }
+        return nums;
     }
 
 }
