@@ -1,31 +1,34 @@
 package com.company.leetcode;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 public class ArrayQuestion {
+    private static int[][] sums;
+
     public static void main(String[] args) {
 
 
         // 数组问题1
         System.out.println("--------------数组问题-最长（连续）子数组的长度-------------");
-        int[] A = {1,1,1,0,0,0,1,1,1,1,0};
+        int[] A = {1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0};
         int K = 2;
         System.out.println(longestOnes(A, 2));
 
         // 数组问题2
         System.out.println("--------------数组问题-数组的度-------------");
-        int[] B = {1,4,1,0,3,0,1,2,2,2,0};
+        int[] B = {1, 4, 1, 0, 3, 0, 1, 2, 2, 2, 0};
         System.out.println(findShortestSubArray(B));
 
         // 数组问题3
         System.out.println("--------------数组问题-托普利茨矩阵-------------");
-        int[][] C = {{1,2,3,4},{5,1,2,3},{9,5,1,2}};
+        int[][] C = {{1, 2, 3, 4}, {5, 1, 2, 3}, {9, 5, 1, 2}};
         System.out.println(isToeplitzMatrix(C));
 
         // 数组问题4
         System.out.println("--------------数组问题-反转图像-------------");
-        int[][] D = {{1,1,0},{1,0,1},{0,0,0}};
+        int[][] D = {{1, 1, 0}, {1, 0, 1}, {0, 0, 0}};
         int[][] arr = flipAndInvertImage(D);
         for (int i = 0; i < arr.length; i++) {
             for (int j = 0; j < arr[i].length; j++) {
@@ -38,12 +41,13 @@ public class ArrayQuestion {
 
         // 数组问题5
         System.out.println("--------------数组问题-最长公共前缀-------------");
-        String[] E = {"flower","flow","flight"};
+        String[] E = {"flower", "flow", "flight"};
         System.out.println(longestCommonPrefix(E));
 
         // 数组问题6
         System.out.println("--------------数组问题-转置矩阵-------------");
-        int[][] F = {{1,1,0,8},{1,0,1,5},{9,0,0,0},{9,3,0,1}};
+        int[][] F = {{1, 1, 0, 8}, {1, 0, 1, 5}, {9, 0, 0, 0}, {9, 3, 0, 1}};
+        System.out.println(F.length);
         int[][] arr1 = transpose(F);
         for (int i = 0; i < arr1.length; i++) {
             for (int j = 0; j < arr1[i].length; j++) {
@@ -54,30 +58,40 @@ public class ArrayQuestion {
 
         // 数组问题7
         System.out.println("--------------数组区域和问题-------------");
-        int[] G = {1,4,1,0,3,0,1,2,2,2,0};
-        System.out.println(NumArray(G,2,7));
+        int[] G = {1, 4, 1, 0, 3, 0, 1, 2, 2, 2, 0};
+        System.out.println(NumArray(G, 2, 7));
 
         // 数组问题8
         System.out.println("--------------数组排序-------------");
-        int[] H = {1,4,2,4,5};
+        int[] H = {1, 4, 2, 4, 5};
         int[] sortArray = sortArray(H);
         for (int i = 0; i < sortArray.length; i++) {
             System.out.println(sortArray[i]);
         }
 
+        // 数组问题9
+        System.out.println("--------------二维数组前缀和问题-------------");
+        int[][] I = {{1, 1, 6}, {1, 7, 1}, {5, 7, 4}};
+        System.out.println(NumMatrix(I, 1, 1, 2, 2));
+
+        // 数组问题10
+        System.out.println("--------------数组排序-------------");
+        int[] arr10 = {1, 4, 2, 5};
+        System.out.println(Arrays.toString(twoSum(arr10, 5)));
 
     }
 
     /**
      * 数组问题1
+     *
      * @param A
      * @param K
      * @return
      */
     public static int longestOnes(int[] A, int K) {
-    //    给定一个由若干 0 和 1 组成的数组 A，我们最多可以将 K 个值从 0 变成 1 。
-    //    返回仅包含 1 的最长（连续）子数组的长度。
-    //题意转换: 把「最多可以把 K 个 0 变成 1，求仅包含 1 的最长子数组的长度」转换为 「找出一个最长的子数组，该子数组内最多允许有 K 个 0 」
+        //    给定一个由若干 0 和 1 组成的数组 A，我们最多可以将 K 个值从 0 变成 1 。
+        //    返回仅包含 1 的最长（连续）子数组的长度。
+        //题意转换: 把「最多可以把 K 个 0 变成 1，求仅包含 1 的最长子数组的长度」转换为 「找出一个最长的子数组，该子数组内最多允许有 K 个 0 」
     /* 思路：使用 left 和 right 两个指针，分别指向滑动窗口的左右边界。
             right 主动右移：right 指针每次移动一步。当 A[right] 为 0，说明滑动窗口内增加了一个 0；
             left 被动右移：判断此时窗口内 0 的个数，如果超过了 K，则 left 指针被迫右移，直至窗口内的 0 的个数小于等于 KK 为止。
@@ -93,13 +107,13 @@ public class ArrayQuestion {
         // 控制循环范围
         while (right < N) {
             if (A[right] == 0)
-                zeros ++;
+                zeros++;
             while (zeros > K) {
                 if (A[left++] == 0)
-                    zeros --;
+                    zeros--;
             }
             res = Math.max(res, right - left + 1);
-            right ++;
+            right++;
         }
         return res;
 
@@ -107,6 +121,7 @@ public class ArrayQuestion {
 
     /**
      * 数组问题2
+     *
      * @param nums
      * @return
      */
@@ -149,6 +164,7 @@ public class ArrayQuestion {
 
     /**
      * 数组问题3
+     *
      * @param arr
      * @return
      */
@@ -170,6 +186,7 @@ public class ArrayQuestion {
 
     /**
      * 数组问题4
+     *
      * @param A
      * @return
      */
@@ -195,6 +212,7 @@ public class ArrayQuestion {
 
     /**
      * 数组问题5
+     *
      * @param strs
      * @return
      */
@@ -256,6 +274,71 @@ public class ArrayQuestion {
             }
         }
         return nums;
+    }
+
+    /**
+     * 数组问题9
+     */
+    //求和数组
+    //int[][] sums;
+
+    /**
+     * 数组问题9
+     * @param matrix 二维数组
+     * @param row1 起始行
+     * @param col1 起始列
+     * @param row2 最终行
+     * @param col2 最终列
+     * @return 结果和
+     */
+    public static int NumMatrix(int[][] matrix, int row1, int col1, int row2, int col2) {
+        int length = matrix.length;
+        int sum = 0;
+        if (matrix == null){
+            return 0;
+        }
+        if (length > 0) {
+            int length1 = matrix[0].length;
+            sums = new int[length][length1 + 1];
+            for (int i = 0; i < length; i++) {
+                for (int j = 0; j < length1; j++) {
+                    sums[i][j + 1] = sums[i][j] + matrix[i][j];
+                }
+            }
+        }
+        // 利用去除前缀和的思想来求得二维数组区域和问题
+        for (int i = row1; i <= row2; i++) {
+            sum += sums[i][col2 + 1] - sums[i][col1];
+        }
+        return sum;
+
+    }
+
+    public int sumRegion(int row1, int col1, int row2, int col2) {
+        int sum = 0;
+        // 利用去除前缀和的思想来求得二维数组区域和问题
+        for (int i = row1; i < row2; i++) {
+            sum += sums[i][col2 + 1] - sums[i][col1];
+        }
+        return sum;
+    }
+
+    /**
+     * 数组问题10
+     * @param nums 数组
+     * @param target 和
+     * @return 两个数的角标
+     */
+    public static int[] twoSum(int[] nums, int target) {
+
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = i + 1; j < nums.length; j++) {
+                if (nums[i] + nums[j] == target){
+                    return new int[]{i,j};
+                }
+            }
+        }
+        return null;
     }
 
 }
