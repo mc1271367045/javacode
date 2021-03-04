@@ -79,6 +79,11 @@ public class ArrayQuestion {
         int[] arr10 = {1, 4, 2, 5};
         System.out.println(Arrays.toString(twoSum(arr10, 5)));
 
+        // 数组问题11
+        System.out.println("--------------删除排序数组中的重复项-------------");
+        int[] arr11 = {1, 4, 4, 2, 5};
+        System.out.println(removeDuplicates(arr11));
+
     }
 
     /**
@@ -248,6 +253,10 @@ public class ArrayQuestion {
 
     /**
      * 数组问题7
+     * @param nums 一维数组
+     * @param m 起始位置
+     * @param n 最终位置
+     * @return 区域和
      */
     public static int NumArray(int[] nums, int m, int n) {
         int[] sums = new int[nums.length + 1];
@@ -339,6 +348,25 @@ public class ArrayQuestion {
             }
         }
         return null;
+    }
+
+    /**
+     * 数组问题11
+     * 删除排序数组中的重复项
+     * @param nums
+     * @return 新数组的长度
+     */
+    public static int removeDuplicates(int[] nums) {
+        if (nums.length == 0) return 0;
+        int i = 0;
+        for (int j = 1; j < nums.length; j++) {
+            // 如果第二个数等于第一个数就不进入这个判断，如果不等于等于，就进入，下一次就是第三个数与第二个数相比 往后以此类推
+            if (nums[j] != nums[i]) {
+                i++;
+                nums[i] = nums[j];
+            }
+        }
+        return i + 1;
     }
 
 }
